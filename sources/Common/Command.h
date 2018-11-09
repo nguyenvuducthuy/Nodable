@@ -17,7 +17,7 @@ namespace Nodable
 
 		/* Execute a command and add it to the history.
 		If there are other commands after they will be erased from the history */
-		void addAndExecute();
+		void addAndExecute(Cmd*);
 
 		/* Undo the current (in the history) command  */
 		void undo();
