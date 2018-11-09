@@ -1,7 +1,7 @@
 
 // include once this file
 #include "Test.h"
-#include "Value.h"
+#include "Member.h"
 #include "Log.h"
 #include "Entity.h"
 #include "Wire.h"
@@ -40,12 +40,12 @@ bool Test::RunAll()
 	LOG_MSG("---------------------------------------------------------------\n");
 	ResetCounters();
 
-	LOG_MSG("Running Test for Value class: \n");
+	LOG_MSG("Running Test for Member class: \n");
 
 	LOG_MSG(" - Connection Flags...\n");
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 
 		v->setConnectionFlags(ConnectionFlags_InputOnly);
 
@@ -80,7 +80,7 @@ bool Test::RunAll()
 
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 
 		v->setConnectionFlags(ConnectionFlags_OutputOnly);
 
@@ -114,7 +114,7 @@ bool Test::RunAll()
 	}
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 
 		v->setConnectionFlags(ConnectionFlags_None);
 
@@ -149,7 +149,7 @@ bool Test::RunAll()
 
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 
 		v->setConnectionFlags(ConnectionFlags_InputAndOutput);
 
@@ -189,7 +189,7 @@ bool Test::RunAll()
 	LOG_MSG(" - Get/Set (Boolean)...\n");
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 		v->setValue(true);		
 
 		if (v->getValueAsBoolean()){
@@ -228,7 +228,7 @@ bool Test::RunAll()
 	LOG_MSG(" - Get/Set (String)...\n");
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 		v->setValue("Hello world !");
 		std::string str = "Hello world !";
 		if (v->getValueAsString() == str){
@@ -273,7 +273,7 @@ bool Test::RunAll()
 	LOG_MSG(" - Get/Set (Number)...\n");
 
 	{
-		std::unique_ptr<Value> v(new Value);
+		std::unique_ptr<Member> v(new Member);
 		v->setValue(50.0F);
 
 		if (v->getValueAsNumber() == 50.0F){

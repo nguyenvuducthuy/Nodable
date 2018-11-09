@@ -2,7 +2,7 @@
 
 #include "Nodable.h"    // forward declarations and common stuff
 #include "Entity.h"       // base class
-#include "Value.h"
+#include "Member.h"
 #include <string>
 
 namespace Nodable{
@@ -25,22 +25,22 @@ namespace Nodable{
 		const char*       getName         ()const;
 		double            getValueAsNumber()const;
 		std::string       getValueAsString()const;
-		Value*            getValue        ()const{return getMember("value");}
+		Member*            getValue        ()const{return getMember("value");}
 		std::string       getTypeAsString ()const;
 	private:
 		std::string       name;
 	};
 
 
-	template<class Value>
-	void Variable::setValue(Value _value)
+	template<class Member>
+	void Variable::setValue(Member _value)
 	{
 		getMember("value")->setValue(_value);
 		updateLabel();
 	}
 
-	template<class Value>
-	void Variable::setValue(Value* _value)
+	template<class Member>
+	void Variable::setValue(Member* _value)
 	{
 		getMember("value")->setValue(_value);
 		updateLabel();

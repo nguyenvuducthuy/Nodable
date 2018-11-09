@@ -53,7 +53,7 @@ namespace Nodable
 	class Cmd_AddWire : public Cmd
 	{
 	public:
-		Cmd_AddWire(Container* _container, Value* _source, Value* _target)
+		Cmd_AddWire(Container* _container, Member* _source, Member* _target)
 		{
 			this->container  = _container;
 			this->source     = _source;
@@ -78,8 +78,8 @@ namespace Nodable
 
 	private:
 		Wire*      wire          = nullptr;
-		Value*     source        = nullptr;
-		Value*     target        = nullptr;
+		Member*     source        = nullptr;
+		Member*     target        = nullptr;
 		Container* container     = nullptr;
 	};
 

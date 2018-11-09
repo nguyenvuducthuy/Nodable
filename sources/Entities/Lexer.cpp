@@ -1,7 +1,7 @@
 #include "Lexer.h"
 #include "Log.h"          // for LOG_DBG(...)
 
-#include "Value.h"
+#include "Member.h"
 #include "Container.h"
 #include "Variable.h"
 #include "BinaryOperation.h"
@@ -58,7 +58,7 @@ bool Lexer::eval()
 Variable* Lexer::buildGraph()
 {
 	LOG_DBG("Lexer::buildGraph() - START\n");	
-	Value*         resultValue = buildGraphRec();
+	Member*         resultValue = buildGraphRec();
 	auto           container   = this->getParent();
 
 	LOG_DBG("Lexer::buildGraph() - Assign result to a variable.\n");
@@ -76,9 +76,9 @@ Variable* Lexer::buildGraph()
 	return resultVariable;
 }
 
-Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _leftValueOverride, Value* _rightValueOverride)
+Member* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Member* _leftValueOverride, Member* _rightValueOverride)
 {
-	Value*          result;
+	Member*          result;
 	Container* context = this->getParent();
 	NODABLE_ASSERT(context != nullptr);
 
@@ -104,7 +104,7 @@ Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _left
 
 			case TokenType_Boolean:
 			{
-				result = new Value();	
+				result = new Member();	
 				result->setValue(tokenWordString == "true");
 
 				break;
@@ -135,7 +135,7 @@ Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _left
 			//--------------------
 
 			case TokenType_Number:{
-				result = new Value();
+				result = new Member();
 				result->setValue(std::stod(tokenWordString));
 				break;
 			}
@@ -145,7 +145,7 @@ Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _left
 			//--------------------
 
 			case TokenType_String:{
-				result = new Value();
+				result = new Member();
 				result->setValue(tokenWordString);	
 				break;
 			}
@@ -177,7 +177,7 @@ Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _left
 		// Connect the Left Operand :
 		//---------------------------
 
-		Value* left;
+		Member* left;
 		if ( _leftValueOverride != nullptr )
 			left = _leftValueOverride;			
 		else
@@ -191,7 +191,7 @@ Value* Lexer::buildGraphRec(size_t _tokenId, size_t _tokenCountMax, Value* _left
 		// Connect the Right Operand :
 		//----------------------------
 
-		Value* right;
+		Member* right;
 		if ( _rightValueOverride != nullptr )
 			right = _rightValueOverride;			
 		else
